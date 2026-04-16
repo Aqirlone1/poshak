@@ -6,12 +6,17 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+# Standard S3, or S3-compatible (e.g. Cloudflare R2: set AWS_S3_ENDPOINT and often AWS_REGION=auto).
 amazon:
   service: S3
   access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
   secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
   region: <%= ENV.fetch("AWS_REGION", "ap-south-1") %>
   bucket: <%= ENV["AWS_BUCKET"] %>
+  <% if ENV["AWS_S3_ENDPOINT"].present? %>
+  endpoint: <%= ENV["AWS_S3_ENDPOINT"] %>
+  force_path_style: true
+  <% end %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -54,9 +54,11 @@ Rails.application.configure do
   config.cache_store = :memory_store
   config.active_job.queue_adapter = :async
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = true
+  # Without real SMTP credentials, do not attempt delivery (avoids 500s on signup / password reset / order mail).
+  # When you set SMTP_USERNAME and SMTP_PASSWORD on the host, mail sends and Devise confirmation emails apply.
+  smtp_configured = ENV["SMTP_USERNAME"].present? && ENV["SMTP_PASSWORD"].present?
+  config.action_mailer.perform_deliveries = smtp_configured
+  config.action_mailer.raise_delivery_errors = smtp_configured
 
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: ENV.fetch("APP_HOST", "example.com") }
