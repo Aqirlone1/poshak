@@ -1,0 +1,9 @@
+<section class="relative overflow-hidden rounded-3xl border border-fuchsia-200 bg-gradient-to-br from-violet-600 via-fuchsia-600 to-pink-500 p-8 text-white">
+  <div class="pointer-events-none absolute -top-20 -right-12 h-56 w-56 rounded-full bg-white/20 blur-2xl"></div>
+  <h1 class="text-3xl font-bold">Checkout</h1>
+  <p class="mt-2 max-w-xl text-fuchsia-100">Express COD flow. Confirm your address, review your order, and place it in seconds.</p>
+  <div class="mt-6 flex flex-wrap gap-3">
+    <%= link_to "Continue to Address", checkout_address_path, class: "rounded-full bg-white px-6 py-2 font-semibold text-fuchsia-700 shadow" %>
+    <%= link_to "Back to Cart", cart_path, class: "rounded-full border border-white/50 px-6 py-2 font-semibold text-white" %>
+  </div>
+</section>

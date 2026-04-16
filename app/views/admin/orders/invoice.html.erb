@@ -1,0 +1,58 @@
+<div class="mx-auto max-w-3xl rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm print:border-0 print:p-0 print:shadow-none">
+  <div class="mb-6 flex items-start justify-between">
+    <div>
+      <h1 class="mb-2 text-3xl font-semibold">Invoice</h1>
+      <p class="text-sm text-neutral-600">Order <%= @order.order_number %></p>
+      <p class="text-sm text-neutral-600">Date: <%= l(@order.created_at.to_date) %></p>
+    </div>
+    <button onclick="window.print()" class="rounded-full bg-gradient-to-r from-violet-700 to-fuchsia-600 px-4 py-2 font-semibold text-white print:hidden">Print</button>
+  </div>
+
+  <div class="mb-6 grid gap-4 md:grid-cols-2">
+    <div class="rounded-xl border border-neutral-200 p-4">
+      <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">Billed To</h2>
+      <p class="text-sm"><%= @order.billing_address.full_name %></p>
+      <p class="text-sm"><%= @order.billing_address.address_line1 %></p>
+      <% if @order.billing_address.address_line2.present? %><p class="text-sm"><%= @order.billing_address.address_line2 %></p><% end %>
+      <p class="text-sm"><%= @order.billing_address.city %>, <%= @order.billing_address.state %> <%= @order.billing_address.postal_code %></p>
+    </div>
+    <div class="rounded-xl border border-neutral-200 p-4">
+      <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">Shipped To</h2>
+      <p class="text-sm"><%= @order.shipping_address.full_name %></p>
+      <p class="text-sm"><%= @order.shipping_address.address_line1 %></p>
+      <% if @order.shipping_address.address_line2.present? %><p class="text-sm"><%= @order.shipping_address.address_line2 %></p><% end %>
+      <p class="text-sm"><%= @order.shipping_address.city %>, <%= @order.shipping_address.state %> <%= @order.shipping_address.postal_code %></p>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto">
+  <table class="w-full min-w-[620px]">
+    <thead class="bg-neutral-50 text-left text-sm">
+      <tr>
+        <th class="px-3 py-2">Item</th>
+        <th class="px-3 py-2">Qty</th>
+        <th class="px-3 py-2">Unit</th>
+        <th class="px-3 py-2">Line Total</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y text-sm">
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td class="px-3 py-2"><%= item.product.name %> (<%= item.product_variant.size %> / <%= item.product_variant.color %>)</td>
+          <td class="px-3 py-2"><%= item.quantity %></td>
+          <td class="px-3 py-2"><%= number_to_currency(item.unit_price) %></td>
+          <td class="px-3 py-2"><%= number_to_currency(item.total_price) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="mt-6 ml-auto max-w-xs space-y-2 text-sm">
+    <div class="flex justify-between"><span>Subtotal</span><span><%= number_to_currency(@order.subtotal) %></span></div>
+    <div class="flex justify-between"><span>Shipping</span><span><%= number_to_currency(@order.shipping_charge) %></span></div>
+    <div class="flex justify-between"><span>Tax</span><span><%= number_to_currency(@order.tax_amount) %></span></div>
+    <div class="flex justify-between"><span>Discount</span><span>-<%= number_to_currency(@order.discount_amount) %></span></div>
+    <div class="flex justify-between border-t pt-2 text-base font-semibold"><span>Total</span><span><%= number_to_currency(@order.total_amount) %></span></div>
+  </div>
+</div>

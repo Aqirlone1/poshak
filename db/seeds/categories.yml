@@ -1,0 +1,17 @@
+categories:
+  - name: "Men"
+    description: "Tailored essentials and modern fits for men."
+    position: 1
+    gender: "men"
+  - name: "Women"
+    description: "Contemporary silhouettes and premium fashion for women."
+    position: 2
+    gender: "women"
+  - name: "Kids"
+    description: "Comfort-first styles for kids."
+    position: 3
+    gender: "kids"
+  - name: "Unisex"
+    description: "Shared style staples with versatile cuts."
+    position: 4
+    gender: "unisex"

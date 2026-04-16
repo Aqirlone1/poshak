@@ -1,0 +1,38 @@
+<div class="mb-6 rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+  <h1 class="text-3xl font-bold text-violet-950">Order <%= @order.order_number %></h1>
+</div>
+
+<div class="mb-6 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <p class="text-sm"><strong>Status:</strong> <span class="rounded-full bg-violet-100 px-2 py-1 text-xs text-violet-700"><%= @order.status.titleize %></span></p>
+  <p class="mt-2 text-sm"><strong>Placed on:</strong> <%= l(@order.created_at.to_date) %></p>
+</div>
+
+<div class="mb-6 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <h2 class="mb-3 text-lg font-semibold">Shipping Address</h2>
+  <p class="text-sm"><%= @order.shipping_address.full_name %></p>
+  <p class="text-sm"><%= @order.shipping_address.address_line1 %></p>
+  <% if @order.shipping_address.address_line2.present? %><p class="text-sm"><%= @order.shipping_address.address_line2 %></p><% end %>
+  <p class="text-sm"><%= @order.shipping_address.city %>, <%= @order.shipping_address.state %> <%= @order.shipping_address.postal_code %></p>
+</div>
+
+<div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <h2 class="mb-4 text-lg font-semibold">Order Items</h2>
+  <table class="w-full">
+    <thead class="bg-neutral-50 text-left text-sm">
+      <tr>
+        <th class="px-3 py-2">Product</th>
+        <th class="px-3 py-2">Quantity</th>
+        <th class="px-3 py-2">Price</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y text-sm">
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td class="px-3 py-2"><%= item.product.name %></td>
+          <td class="px-3 py-2"><%= item.quantity %></td>
+          <td class="px-3 py-2"><%= number_to_currency(item.total_price) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,17 @@
+<div class="mb-6 rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+  <h1 class="text-3xl font-bold text-violet-950">My Wishlist</h1>
+</div>
+
+<div class="grid gap-4 md:grid-cols-3">
+  <% @wishlists.each do |wishlist| %>
+    <% product = wishlist.product %>
+    <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+      <h2 class="font-semibold"><%= link_to product.name, product_path(product), class: "hover:text-fuchsia-700" %></h2>
+      <p class="text-sm text-neutral-600"><%= product.category&.name %></p>
+      <p class="mt-2 font-medium"><%= number_to_currency(product.price) %></p>
+      <div class="mt-4">
+        <%= button_to "Remove", wishlist_path(wishlist), method: :delete, class: "rounded-full bg-red-50 px-3 py-1.5 text-sm font-semibold text-red-600" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<section class="mx-auto max-w-md py-10">
+  <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+    <h1 class="mb-1 text-2xl font-semibold">Set a new password</h1>
+    <p class="mb-6 text-sm text-neutral-600">Choose a strong password for your account.</p>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-4" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div>
+        <%= f.label :password, "New password", class: "mb-1 block text-sm font-medium" %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "w-full rounded border border-neutral-300 px-3 py-2 outline-none focus:ring-1 focus:ring-black" %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation, class: "mb-1 block text-sm font-medium" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full rounded border border-neutral-300 px-3 py-2 outline-none focus:ring-1 focus:ring-black" %>
+      </div>
+
+      <%= f.submit "Update password", class: "w-full rounded bg-black px-4 py-2 font-medium text-white hover:bg-neutral-800" %>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<section class="space-y-6">
+  <div class="rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+    <h1 class="text-3xl font-bold text-violet-950">Products</h1>
+    <p class="mt-1 text-sm text-violet-700">Discover expressive fits and premium textures.</p>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-2">
+    <details class="relative">
+      <summary class="cursor-pointer list-none rounded-full bg-neutral-900 px-3 py-1.5 text-sm font-semibold text-white">...</summary>
+      <div class="absolute left-0 top-11 z-10 w-80 rounded-2xl border border-neutral-200 bg-white p-4 shadow-xl">
+        <%= form_with url: products_path, method: :get, html: { data: { controller: "filter" } }, class: "space-y-3" do |f| %>
+          <%= hidden_field_tag :gender, params[:gender] %>
+          <div>
+            <%= label_tag "q_name_or_sku_or_category_name_cont", "Search", class: "mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-500" %>
+            <%= text_field_tag "q[name_or_sku_or_category_name_cont]", params.dig(:q, :name_or_sku_or_category_name_cont), placeholder: "Product, SKU, category", class: "w-full rounded-xl border border-neutral-300 px-3 py-2 text-sm", data: { action: "change->filter#submit" } %>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <%= label_tag :min_price, "Min", class: "mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-500" %>
+              <%= number_field_tag :min_price, params[:min_price], placeholder: "0", class: "w-full rounded-xl border border-neutral-300 px-3 py-2 text-sm", data: { action: "change->filter#submit" } %>
+            </div>
+            <div>
+              <%= label_tag :max_price, "Max", class: "mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-500" %>
+              <%= number_field_tag :max_price, params[:max_price], placeholder: "5000", class: "w-full rounded-xl border border-neutral-300 px-3 py-2 text-sm", data: { action: "change->filter#submit" } %>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <%= link_to "Clear", products_path(gender: params[:gender]), class: "text-xs font-semibold text-neutral-500 hover:text-neutral-800" %>
+            <%= f.submit "Apply", class: "rounded-full bg-gradient-to-r from-violet-700 to-fuchsia-600 px-4 py-1.5 text-xs font-semibold text-white" %>
+          </div>
+        <% end %>
+      </div>
+    </details>
+
+    <%= link_to "All", products_path(request.query_parameters.except(:gender)), class: "rounded-full px-4 py-1.5 text-sm font-semibold #{params[:gender].blank? ? 'bg-black text-white' : 'bg-neutral-100 text-neutral-700'}" %>
+    <% Product.genders.keys.each do |gender| %>
+      <%= link_to gender.titleize, products_path(request.query_parameters.merge(gender: gender)), class: "rounded-full px-4 py-1.5 text-sm font-semibold #{params[:gender] == gender ? 'bg-black text-white' : 'bg-neutral-100 text-neutral-700'}" %>
+    <% end %>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+    <% @products.each do |product| %>
+      <%= render "shared/product_card", product: product %>
+    <% end %>
+  </div>
+
+  <div class="mt-6"><%= paginate @products %></div>
+</section>

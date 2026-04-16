@@ -1,0 +1,52 @@
+<div class="mb-6 rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+  <h1 class="text-3xl font-bold text-violet-950">Orders</h1>
+</div>
+
+<div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <div class="overflow-x-auto">
+  <table class="w-full min-w-[980px]">
+    <thead class="bg-neutral-50 text-left text-sm">
+      <tr>
+        <th class="px-3 py-2">Order Number</th>
+        <th class="px-3 py-2">Customer</th>
+        <th class="px-3 py-2">Status</th>
+        <th class="px-3 py-2">Total</th>
+        <th class="px-3 py-2">Date</th>
+        <th class="px-3 py-2">Change Status</th>
+        <th class="px-3 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y text-sm">
+      <% @orders.each do |order| %>
+        <tr>
+          <td class="px-3 py-2"><%= order.order_number %></td>
+          <td class="px-3 py-2"><%= order.user&.full_name.presence || order.user&.email %></td>
+          <td class="px-3 py-2">
+            <% status_class = case order.status.to_sym
+                             when :delivered then "bg-green-100 text-green-700"
+                             when :cancelled then "bg-red-100 text-red-700"
+                             when :shipped then "bg-blue-100 text-blue-700"
+                             else "bg-yellow-100 text-yellow-700"
+                             end %>
+            <span class="rounded-full px-2 py-1 text-xs <%= status_class %>"><%= order.status.titleize %></span>
+          </td>
+          <td class="px-3 py-2"><%= number_to_currency(order.total_amount) %></td>
+          <td class="px-3 py-2"><%= l(order.created_at, format: :short) %></td>
+          <td class="px-3 py-2">
+            <%= form_with url: update_status_admin_order_path(order), method: :patch, class: "flex items-center gap-2" do |f| %>
+              <%= f.select :status, Order.statuses.keys.map { |status| [status.titleize, status] }, { selected: order.status }, class: "rounded border border-neutral-300 px-2 py-1 text-xs" %>
+              <%= f.submit "Save", class: "rounded-full bg-violet-100 px-2 py-1 text-xs font-semibold text-violet-700" %>
+            <% end %>
+          </td>
+          <td class="px-3 py-2">
+            <div class="flex gap-2">
+              <%= link_to "View", admin_order_path(order), class: "rounded-full border border-neutral-300 px-3 py-1.5 text-sm" %>
+              <%= link_to "Invoice", invoice_admin_order_path(order), class: "rounded-full border border-neutral-300 px-3 py-1.5 text-sm" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

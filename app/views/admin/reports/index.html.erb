@@ -1,0 +1,40 @@
+<div class="mb-6 rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+  <h1 class="text-3xl font-bold text-violet-950">Reports</h1>
+</div>
+
+<div class="mb-6 grid gap-4 md:grid-cols-2">
+  <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+    <h2 class="mb-3 text-lg font-semibold">Daily Sales (30 days)</h2>
+    <div class="flex h-56 items-center justify-center rounded border border-dashed text-neutral-500">
+      Chart placeholder for daily sales
+    </div>
+  </div>
+  <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+    <h2 class="mb-3 text-lg font-semibold">Monthly Sales (6 months)</h2>
+    <div class="flex h-56 items-center justify-center rounded border border-dashed text-neutral-500">
+      Chart placeholder for monthly sales
+    </div>
+  </div>
+</div>
+
+<div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <h2 class="mb-4 text-lg font-semibold">Top Products</h2>
+  <div class="overflow-x-auto">
+  <table class="w-full min-w-[480px]">
+    <thead class="bg-neutral-50 text-left text-sm">
+      <tr>
+        <th class="px-3 py-2">Product</th>
+        <th class="px-3 py-2">Units Sold</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y text-sm">
+      <% @top_products.each do |name, quantity| %>
+        <tr>
+          <td class="px-3 py-2"><%= name %></td>
+          <td class="px-3 py-2"><%= quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

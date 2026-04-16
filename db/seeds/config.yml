@@ -1,0 +1,29 @@
+password: "password123"
+default_country: "India"
+
+generation:
+  customers_count: 25
+  addresses_per_customer: 2
+  max_orders_per_customer: 5
+  max_wishlist_items_per_customer: 8
+  cart_fill_ratio: 0.45
+  products_per_category: 12
+  variants_per_product: 4
+  images_per_product: 3
+  min_stock_per_variant: 5
+  max_stock_per_variant: 60
+
+pricing:
+  min_price: 899
+  max_price: 4999
+  shipping_charge: 50
+  free_shipping_threshold: 1000
+  gst_rate: 0.18
+
+order_status_weights:
+  pending: 10
+  confirmed: 15
+  processing: 20
+  shipped: 20
+  delivered: 30
+  cancelled: 5

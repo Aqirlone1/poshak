@@ -1,0 +1,31 @@
+<section class="space-y-12">
+  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-700 via-fuchsia-600 to-pink-500 px-8 py-16 text-white shadow-2xl">
+    <div class="pointer-events-none absolute -top-16 -left-16 h-48 w-48 rounded-full bg-white/20 blur-2xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 right-0 h-56 w-56 rounded-full bg-black/20 blur-2xl"></div>
+    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-fuchsia-100">Spring/Summer 2026</p>
+    <h1 class="text-4xl font-bold md:text-5xl">Not Minimal. Bold Fashion Energy.</h1>
+    <p class="mt-3 max-w-2xl text-fuchsia-100">Statement fits, dramatic color stories, and runway-inspired silhouettes crafted for everyday street luxury.</p>
+    <div class="mt-6 flex gap-3">
+      <%= link_to "Shop Now", products_path, class: "rounded-full bg-white px-6 py-2 font-semibold text-fuchsia-700" %>
+      <%= link_to "New Arrivals", products_path(q: { featured_eq: true }), class: "rounded-full border border-white/50 px-6 py-2 font-semibold text-white" %>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="mb-4 text-2xl font-bold text-neutral-900">Featured Drops</h2>
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <% @featured_products.each do |product| %>
+        <%= render "shared/product_card", product: product %>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="mb-4 text-2xl font-bold text-neutral-900">New Arrivals</h2>
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <% @new_arrivals.each do |product| %>
+        <%= render "shared/product_card", product: product %>
+      <% end %>
+    </div>
+  </div>
+</section>

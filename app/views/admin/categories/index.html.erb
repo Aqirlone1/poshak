@@ -1,0 +1,39 @@
+<div class="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+  <h1 class="text-3xl font-bold text-violet-950">Categories</h1>
+  <%= link_to "New Category", new_admin_category_path, class: "rounded-full bg-gradient-to-r from-violet-700 to-fuchsia-600 px-4 py-2 font-semibold text-white" %>
+</div>
+
+<div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <div class="overflow-x-auto">
+  <table class="w-full min-w-[720px]">
+    <thead class="bg-neutral-50 text-left text-sm">
+      <tr>
+        <th class="px-3 py-2">Name</th>
+        <th class="px-3 py-2">Slug</th>
+        <th class="px-3 py-2">Active</th>
+        <th class="px-3 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y text-sm">
+      <% @categories.each do |category| %>
+        <tr>
+          <td class="px-3 py-2"><%= link_to category.name, admin_category_path(category), class: "font-semibold hover:text-fuchsia-700" %></td>
+          <td class="px-3 py-2"><%= category.slug %></td>
+          <td class="px-3 py-2">
+            <span class="rounded-full px-2 py-1 text-xs <%= category.active? ? 'bg-green-100 text-green-700' : 'bg-neutral-100 text-neutral-700' %>">
+              <%= category.active? ? "Active" : "Inactive" %>
+            </span>
+          </td>
+          <td class="px-3 py-2">
+            <div class="flex flex-wrap gap-2">
+              <%= button_to "Toggle", toggle_active_admin_category_path(category), method: :patch, class: "rounded-full border border-neutral-300 px-3 py-1.5 text-sm" %>
+              <%= link_to "Edit", edit_admin_category_path(category), class: "rounded-full border border-neutral-300 px-3 py-1.5 text-sm" %>
+              <%= button_to "Delete", admin_category_path(category), method: :delete, data: { turbo_confirm: "Delete this category?" }, class: "rounded-full bg-red-50 px-3 py-1.5 text-sm font-semibold text-red-600" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

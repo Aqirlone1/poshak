@@ -1,0 +1,73 @@
+product_name_parts:
+  prefix:
+    - "Premium"
+    - "Classic"
+    - "Urban"
+    - "Luxe"
+    - "Essential"
+    - "Signature"
+    - "Modern"
+    - "Refined"
+  item:
+    - "Shirt"
+    - "Polo"
+    - "Tee"
+    - "Hoodie"
+    - "Jacket"
+    - "Kurta"
+    - "Dress"
+    - "Top"
+    - "Skirt"
+    - "Jeans"
+    - "Trousers"
+    - "Co-ord Set"
+  suffix:
+    - "Edition"
+    - "Fit"
+    - "Collection"
+    - "Series"
+    - "Studio"
+    - "Line"
+
+brands:
+  - "Poshak"
+  - "Poshak Atelier"
+  - "Poshak Studio"
+  - "Poshak Craft"
+
+materials:
+  - "Cotton"
+  - "Linen"
+  - "Denim"
+  - "Viscose"
+  - "Poly-Cotton"
+  - "Rayon"
+  - "Wool Blend"
+
+care_instructions:
+  - "Machine wash cold with similar colors."
+  - "Hand wash separately. Do not bleach."
+  - "Gentle cycle wash. Warm iron if needed."
+  - "Dry clean recommended for best finish."
+
+variant_sizes:
+  - "XS"
+  - "S"
+  - "M"
+  - "L"
+  - "XL"
+  - "XXL"
+
+variant_colors:
+  - "Black"
+  - "White"
+  - "Navy"
+  - "Olive"
+  - "Beige"
+  - "Wine"
+  - "Grey"
+  - "Maroon"
+
+image_sources:
+  - "https://picsum.photos/seed/%{seed}/900/1100"
+  - "https://source.unsplash.com/900x1100/?fashion,%{tag}"

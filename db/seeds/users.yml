@@ -1,0 +1,19 @@
+admins:
+  - email: "admin@poshak.test"
+    first_name: "Admin"
+    last_name: "User"
+    phone_number: "9999999999"
+
+customers:
+  - email: "customer@poshak.test"
+    first_name: "Test"
+    last_name: "Customer"
+    phone_number: "8888888888"
+  - email: "fashionlover@poshak.test"
+    first_name: "Anaya"
+    last_name: "Sharma"
+    phone_number: "8877665544"
+  - email: "trendsetter@poshak.test"
+    first_name: "Kabir"
+    last_name: "Mehta"
+    phone_number: "9988776655"

@@ -1,0 +1,28 @@
+<div class="mb-6 rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+  <h1 class="text-3xl font-bold text-violet-950">Customers</h1>
+</div>
+
+<div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+  <div class="overflow-x-auto">
+  <table class="w-full min-w-[700px]">
+    <thead class="bg-neutral-50 text-left text-sm">
+      <tr>
+        <th class="px-3 py-2">Name</th>
+        <th class="px-3 py-2">Email</th>
+        <th class="px-3 py-2">Orders</th>
+        <th class="px-3 py-2">Joined</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y text-sm">
+      <% @customers.each do |customer| %>
+        <tr>
+          <td class="px-3 py-2"><%= link_to customer.full_name, admin_customer_path(customer), class: "font-semibold hover:text-fuchsia-700" %></td>
+          <td class="px-3 py-2"><%= customer.email %></td>
+          <td class="px-3 py-2"><%= customer.orders.count %></td>
+          <td class="px-3 py-2"><%= l(customer.created_at.to_date) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

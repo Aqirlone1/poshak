@@ -1,0 +1,31 @@
+<section class="space-y-6">
+  <div class="rounded-2xl border border-fuchsia-100 bg-gradient-to-r from-violet-50 via-fuchsia-50 to-pink-50 p-5">
+    <h1 class="text-3xl font-bold text-violet-950">My Account</h1>
+    <p class="mt-1 text-violet-700">Welcome back, <%= current_user.first_name.presence || current_user.email %>.</p>
+  </div>
+
+  <div class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+    <h2 class="mb-4 text-lg font-bold">Recent Orders</h2>
+    <ul class="space-y-2 text-sm">
+      <% @orders.each do |order| %>
+        <% status_class = order.cancelled? ? "bg-red-100 text-red-700" : "bg-violet-100 text-violet-700" %>
+        <li class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-neutral-200 p-3">
+          <span><%= link_to order.order_number, account_order_path(order), class: "font-semibold hover:text-fuchsia-700" %> - <%= number_to_currency(order.total_amount) %></span>
+          <div class="flex items-center gap-2">
+            <span class="rounded-full px-2 py-1 text-xs <%= status_class %>"><%= order.status.titleize %></span>
+            <% if order.cancellable? %>
+              <%= button_to "Cancel", cancel_account_order_path(order), method: :patch, data: { turbo_confirm: "Cancel this order?" }, class: "rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600" %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-3">
+    <%= link_to "Manage Addresses", account_addresses_path, class: "rounded-2xl border border-neutral-200 bg-white p-4 text-center font-semibold shadow-sm hover:shadow-md" %>
+    <%= link_to "Wishlist (#{@wishlist_count})", wishlists_path, class: "rounded-2xl border border-neutral-200 bg-white p-4 text-center font-semibold shadow-sm hover:shadow-md" %>
+    <%= link_to "Edit Profile", account_profile_path, class: "rounded-2xl border border-neutral-200 bg-white p-4 text-center font-semibold shadow-sm hover:shadow-md" %>
+  </div>
+</section>
+</div>

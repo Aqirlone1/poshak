@@ -1,0 +1,24 @@
+<div class="mb-6 flex items-center justify-between">
+  <h1 class="text-3xl font-bold text-violet-950">My Addresses</h1>
+  <%= link_to "Add New Address", new_account_address_path, class: "rounded-full bg-gradient-to-r from-violet-700 to-fuchsia-600 px-5 py-2 font-semibold text-white" %>
+</div>
+
+<div class="grid gap-4 md:grid-cols-2">
+  <% @addresses.each do |address| %>
+    <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+      <div class="mb-2 flex items-center justify-between">
+        <p class="font-medium"><%= address.full_name %></p>
+        <% if address.is_default? %><span class="rounded-full bg-violet-100 px-2 py-1 text-xs font-semibold text-violet-700">Default</span><% end %>
+      </div>
+      <p class="text-sm"><%= address.address_line1 %></p>
+      <% if address.address_line2.present? %><p class="text-sm"><%= address.address_line2 %></p><% end %>
+      <p class="text-sm"><%= address.city %>, <%= address.state %> <%= address.postal_code %></p>
+      <p class="text-sm"><%= address.country %></p>
+      <div class="mt-4 flex gap-2">
+        <%= link_to "View", account_address_path(address), class: "rounded-full border border-neutral-300 px-3 py-1.5 text-sm" %>
+        <%= link_to "Edit", edit_account_address_path(address), class: "rounded-full border border-neutral-300 px-3 py-1.5 text-sm" %>
+        <%= button_to "Delete", account_address_path(address), method: :delete, data: { turbo_confirm: "Delete this address?" }, class: "rounded-full bg-red-50 px-3 py-1.5 text-sm font-semibold text-red-600" %>
+      </div>
+    </div>
+  <% end %>
+</div>
