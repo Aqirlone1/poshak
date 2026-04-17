@@ -1,0 +1,58 @@
+# See https://help.github.com/articles/ignoring-files for more about ignoring files.
+
+# Environment and secrets
+/.env
+/.env.*
+!/.env.example
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but allow the directory.
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Ignore storage (uploaded files).
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
+
+# Ignore master key (never commit).
+/config/master.key
+/config/credentials/*.key
+
+# Kamal local secrets (references env / password managers).
+/.kamal/secrets
+
+# IDE / tooling
+/.idea/
+/.vscode/
+/.ruby-lsp/
+/.wrangler/
+
+# Cursor / local tooling
+/skills-lock.json
+/.agents/
+
+# Accidental key files in repo root
+/q
+/q.pub
+
+# Node (if added later)
+/node_modules/
+/yarn-error.log
+
+# Assets
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/public/assets
+
+# Ignore keyfiles for decrypting credentials and more.
+*.key
